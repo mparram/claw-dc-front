@@ -17,8 +17,6 @@ socket.on("video_uri", (uri) => {
     console.log("video_uri: " + uri);
     var mycanvas = document.getElementById("video-canvas");
     var player = new JSMpeg.Player(uri, {canvas: mycanvas});
-    var myvideo = document.getElementById("video-element");
-    myvideo.src = uri;
 });
 
 socket.on("playlist", (data) => {
