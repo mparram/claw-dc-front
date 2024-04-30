@@ -76,7 +76,7 @@ document.addEventListener('keydown', (event) => {
         console.log("Dcode: " + code + " window[code]: " + window[code]);
         if (code === "Space"){
             launchClaw();
-        } else if (window[code] == false) {
+        } else if (window[code] === false) {
             window[code] = true;
             socket.emit("control", code, "down");
             console.log("DScode: " + code + " window[code]: " + window[code]);
@@ -89,7 +89,7 @@ document.addEventListener('keyup', (event) => {
     
     if ((currentplayer) &&(validkeys.indexOf(code) > -1 )) {
         console.log("Ucode: " + code + " window[code]: " + window[code]);
-        if (window[code] == true) {
+        if (window[code] === true) {
             window[code] = false;
             socket.emit("control", code, "up");
             console.log("UScode: " + code + " window[code]: " + window[code]);
@@ -123,7 +123,7 @@ function startcountdown() {
         if (currentplayer == true) {
             played = true;
             var direction=joy.GetDir();
-            if ((["N","NW","NE"].includes(direction)) && (ArrowUp == false)) {
+            if ((["N","NW","NE"].includes(direction)) && (ArrowUp === false)) {
                 console.log("JArrowUp: " + ArrowUp + " window['ArrowUp']: " + window["ArrowUp"]);
                 ArrowUp = true;
                 socket.emit("control", "ArrowUp", "down");
@@ -132,7 +132,7 @@ function startcountdown() {
                     socket.emit("control", "ArrowDown", "up");
                 }
                 console.log("Up");
-            } else if ((["S","SW","SE"].includes(direction)) && (ArrowDown == false)) {
+            } else if ((["S","SW","SE"].includes(direction)) && (ArrowDown === false)) {
                 ArrowDown = true;
                 socket.emit("control", "ArrowDown", "down");
                 if (ArrowUp == true){
@@ -141,7 +141,7 @@ function startcountdown() {
                 }
                 console.log("Down");
             }
-            if ((["E","NE","SE"].includes(direction)) && (ArrowRight == false)) {
+            if ((["E","NE","SE"].includes(direction)) && (ArrowRight === false)) {
                 ArrowRight = true;
                 socket.emit("control", "ArrowRight", "down");
                 if (ArrowLeft == true){
@@ -149,7 +149,7 @@ function startcountdown() {
                     socket.emit("control", "ArrowLeft", "up");
                 }
                 console.log("Right");
-            } else if ((["W","NW","SW"].includes(direction)) && (ArrowLeft == false)) {
+            } else if ((["W","NW","SW"].includes(direction)) && (ArrowLeft === false)) {
                 ArrowLeft = true;
                 socket.emit("control", "ArrowLeft", "down");
                 if (ArrowRight == true){
