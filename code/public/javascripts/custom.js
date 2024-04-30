@@ -66,10 +66,10 @@ function toggledisplay() {
   }
 var initial = true;
 var played = false;
-var ArrowUp = false;
-var ArrowDown = false;
-var ArrowLeft = false;
-var ArrowRight = false;
+window["ArrowUp"] = false;
+window["ArrowDown"] = false;
+window["ArrowLeft"] = false;
+window["ArrowRight"] = false;
 document.addEventListener('keydown', (event) => {
     var code = event.code;
     console.log("Keydown: " + code);
