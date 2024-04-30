@@ -136,7 +136,7 @@ var enableplayer = function(usr) {
     currentplayer = usr;
     console.log("currentplayer: " + currentplayer);
     timeoutgame = setTimeout(() => {
-      ioclient.emit("control", "Space");
+      ioclient.emit("control", "Space", "down");
       currentplayer = null;
       socketlist[usr].emit('endgame', true);
       socketlist[usr].removeAllListeners('control');
