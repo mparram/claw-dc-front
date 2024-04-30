@@ -64,13 +64,24 @@ function toggledisplay() {
     }
 
   }
+var initial = true;
+var played = false;
+var ArrowUp = false;
+var ArrowDown = false;
+var ArrowLeft = false;
+var ArrowRight = false;
 document.addEventListener('keydown', (event) => {
     var code = event.code;    
     if ((currentplayer) &&(validkeys.indexOf(code) > -1 )) {
-        socket.emit("control", code, "down");
         if (code === "Space"){
             launchClaw();
+        } else if (window[code] == false) {
+            socket.emit("control", code, "down");
+            window[code] = true;
         }
+
+        
+
     }
 }, false);
 
@@ -78,7 +89,10 @@ document.addEventListener('keyup', (event) => {
     var code = event.code;
     
     if ((currentplayer) &&(validkeys.indexOf(code) > -1 )) {
-        socket.emit("control", code, "up");
+        if (window[code] == true) {
+            socket.emit("control", code, "up");
+            window[code] = false;
+        }
     }
 }, false);
 
@@ -102,35 +116,67 @@ function startcountdown() {
     document.getElementById("countdown").style.top= "20%";
     document.getElementById("countdown").innerHTML = "Ready...";
     document.getElementById("countdown").style.visibility = "visible";
-    var initial = true;
-    var played = false;
-        var joystickCatch = setInterval(function(){ 
-            
-            if (currentplayer == true) {
-                played = true;
-                var direction=joy.GetDir();
-                if (["N","NW","NE"].includes(direction)) {
-                    socket.emit("control", "ArrowUp", "down");
+
+    var joystickCatch = setInterval(function(){ 
+        
+        if (currentplayer == true) {
+            played = true;
+            var direction=joy.GetDir();
+            if ((["N","NW","NE"].includes(direction)) && (ArrowUp == false)) {
+                ArrowUp = true;
+                socket.emit("control", "ArrowUp", "down");
+                if (ArrowDown == true){
+                    ArrowDown = false;
                     socket.emit("control", "ArrowDown", "up");
-                    console.log("Up");
-                } else if (["S","SW","SE"].includes(direction)) {
-                    socket.emit("control", "ArrowDown", "down");
+                }
+                console.log("Up");
+            } else if ((["S","SW","SE"].includes(direction)) && (ArrowDown == false)) {
+                ArrowDown = true;
+                socket.emit("control", "ArrowDown", "down");
+                if (ArrowUp == true){
+                    ArrowUp = false;
                     socket.emit("control", "ArrowUp", "up");
-                    console.log("Down");
                 }
-                if (["E","NE","SE"].includes(direction)) {
-                    socket.emit("control", "ArrowRight", "down");
-                    socket.emit("control", "ArrowLeft", "up");
-                    console.log("Right");
-                } else if (["W","NW","SW"].includes(direction)) {
-                    socket.emit("control", "ArrowLeft", "down");
-                    socket.emit("control", "ArrowRight", "up");
-                    console.log("Left");
-                }
-            } else if ((currentplayer ==false ) && (played == true)) {
-                clearInterval(joystickCatch);
+                console.log("Down");
             }
-        }, 20);
+            if ((["E","NE","SE"].includes(direction)) && (ArrowRight == false)) {
+                ArrowRight = true;
+                socket.emit("control", "ArrowRight", "down");
+                if (ArrowLeft == true){
+                    ArrowLeft = false;
+                    socket.emit("control", "ArrowLeft", "up");
+                }
+                console.log("Right");
+            } else if ((["W","NW","SW"].includes(direction)) && (ArrowLeft == false)) {
+                ArrowLeft = true;
+                socket.emit("control", "ArrowLeft", "down");
+                if (ArrowRight == true){
+                    ArrowRight = false;
+                    socket.emit("control", "ArrowRight", "up");
+                }
+                console.log("Left");
+            } else if (direction == "C"){
+                if (ArrowUp == true){
+                    ArrowUp = false;
+                    socket.emit("control", "ArrowUp", "up");
+                }
+                if (ArrowDown == true){
+                    ArrowDown = false;
+                    socket.emit("control", "ArrowDown", "up");
+                }
+                if (ArrowLeft == true){
+                    ArrowLeft = false;
+                    socket.emit("control", "ArrowLeft", "up");
+                }
+                if (ArrowRight == true){
+                    ArrowRight = false;
+                    socket.emit("control", "ArrowRight", "up");
+                }
+            }
+        } else if ((currentplayer ==false ) && (played == true)) {
+            clearInterval(joystickCatch);
+        }
+    }, 20);
     countdownInterval = setInterval(function() {
         console.log("countdown: " + countdown);
         if ((countdown === -1) && (initial === true)) {
