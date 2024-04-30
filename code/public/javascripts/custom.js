@@ -73,15 +73,14 @@ var ArrowRight = false;
 document.addEventListener('keydown', (event) => {
     var code = event.code;    
     if ((currentplayer) &&(validkeys.indexOf(code) > -1 )) {
+        console.log("Dcode: " + code + " window[code]: " + window[code]);
         if (code === "Space"){
             launchClaw();
         } else if (window[code] == false) {
-            socket.emit("control", code, "down");
             window[code] = true;
+            socket.emit("control", code, "down");
+            console.log("DScode: " + code + " window[code]: " + window[code]);
         }
-
-        
-
     }
 }, false);
 
@@ -89,9 +88,11 @@ document.addEventListener('keyup', (event) => {
     var code = event.code;
     
     if ((currentplayer) &&(validkeys.indexOf(code) > -1 )) {
+        console.log("Ucode: " + code + " window[code]: " + window[code]);
         if (window[code] == true) {
-            socket.emit("control", code, "up");
             window[code] = false;
+            socket.emit("control", code, "up");
+            console.log("UScode: " + code + " window[code]: " + window[code]);
         }
     }
 }, false);
@@ -123,6 +124,7 @@ function startcountdown() {
             played = true;
             var direction=joy.GetDir();
             if ((["N","NW","NE"].includes(direction)) && (ArrowUp == false)) {
+                console.log("JArrowUp: " + ArrowUp + " window['ArrowUp']: " + window["ArrowUp"]);
                 ArrowUp = true;
                 socket.emit("control", "ArrowUp", "down");
                 if (ArrowDown == true){
