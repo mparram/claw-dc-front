@@ -68,6 +68,7 @@ var initial = true;
 var played = false;
 
 var keysEnabled = {"ArrowUp": false, "ArrowDown": false, "ArrowLeft": false, "ArrowRight": false};
+var joyEnabled = {"ArrowUp": false, "ArrowDown": false, "ArrowLeft": false, "ArrowRight": false};
 document.addEventListener('keydown', (event) => {
     var code = event.code;
     console.log("Keydown: " + code);
@@ -122,55 +123,55 @@ function startcountdown() {
         if (currentplayer == true) {
             played = true;
             var direction=joy.GetDir();
-            if ((["N","NW","NE"].includes(direction)) && (keysEnabled["ArrowUp"] === false)) {
-                console.log("JArrowUp: " + ArrowUp + " keysEnabled['ArrowUp']: " + keysEnabled["ArrowUp"]);
-                keysEnabled["ArrowUp"] = true;
+            if ((["N","NW","NE"].includes(direction)) && (joyEnabled["ArrowUp"] === false)) {
+                console.log("JArrowUp: " + ArrowUp + " joyEnabled['ArrowUp']: " + joyEnabled["ArrowUp"]);
+                joyEnabled["ArrowUp"] = true;
                 socket.emit("control", "ArrowUp", "down");
-                if (keysEnabled["ArrowDown"] == true){
-                    keysEnabled["ArrowDown"] = false;
+                if (joyEnabled["ArrowDown"] == true){
+                    joyEnabled["ArrowDown"] = false;
                     socket.emit("control", "ArrowDown", "up");
                 }
                 console.log("Up");
-            } else if ((["S","SW","SE"].includes(direction)) && (keysEnabled["ArrowDown"] === false)) {
-                keysEnabled["ArrowDown"] = true;
+            } else if ((["S","SW","SE"].includes(direction)) && (joyEnabled["ArrowDown"] === false)) {
+                joyEnabled["ArrowDown"] = true;
                 socket.emit("control", "ArrowDown", "down");
-                if (keysEnabled["ArrowUp"] == true){
-                    keysEnabled["ArrowUp"] = false;
+                if (joyEnabled["ArrowUp"] == true){
+                    joyEnabled["ArrowUp"] = false;
                     socket.emit("control", "ArrowUp", "up");
                 }
                 console.log("Down");
             }
-            if ((["E","NE","SE"].includes(direction)) && (keysEnabled["ArrowRight"] === false)) {
-                keysEnabled["ArrowRight"] = true;
+            if ((["E","NE","SE"].includes(direction)) && (joyEnabled["ArrowRight"] === false)) {
+                joyEnabled["ArrowRight"] = true;
                 socket.emit("control", "ArrowRight", "down");
-                if (keysEnabled["ArrowLeft"] == true){
-                    keysEnabled["ArrowLeft"] = false;
+                if (joyEnabled["ArrowLeft"] == true){
+                    joyEnabled["ArrowLeft"] = false;
                     socket.emit("control", "ArrowLeft", "up");
                 }
                 console.log("Right");
-            } else if ((["W","NW","SW"].includes(direction)) && (keysEnabled["ArrowLeft"] === false)) {
-                keysEnabled["ArrowLeft"] = true;
+            } else if ((["W","NW","SW"].includes(direction)) && (joyEnabled["ArrowLeft"] === false)) {
+                joyEnabled["ArrowLeft"] = true;
                 socket.emit("control", "ArrowLeft", "down");
-                if (keysEnabled["ArrowRight"] === true){
-                    keysEnabled["ArrowRight"] = false;
+                if (joyEnabled["ArrowRight"] === true){
+                    joyEnabled["ArrowRight"] = false;
                     socket.emit("control", "ArrowRight", "up");
                 }
                 console.log("Left");
             } else if (direction == "C"){
-                if (keysEnabled["ArrowUp"] === true){
-                    keysEnabled["ArrowUp"] = false;
+                if (joyEnabled["ArrowUp"] === true){
+                    joyEnabled["ArrowUp"] = false;
                     socket.emit("control", "ArrowUp", "up");
                 }
-                if (keysEnabled["ArrowDown"] === true){
-                    keysEnabled["ArrowDown"] = false;
+                if (joyEnabled["ArrowDown"] === true){
+                    joyEnabled["ArrowDown"] = false;
                     socket.emit("control", "ArrowDown", "up");
                 }
-                if (keysEnabled["ArrowLeft"] === true){
-                    keysEnabled["ArrowLeft"] = false;
+                if (joyEnabled["ArrowLeft"] === true){
+                    joyEnabled["ArrowLeft"] = false;
                     socket.emit("control", "ArrowLeft", "up");
                 }
-                if (keysEnabled["ArrowRight"] === true){
-                    keysEnabled["ArrowRight"] = false;
+                if (joyEnabled["ArrowRight"] === true){
+                    joyEnabled["ArrowRight"] = false;
                     socket.emit("control", "ArrowRight", "up");
                 }
             }
