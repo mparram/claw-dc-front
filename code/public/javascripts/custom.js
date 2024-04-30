@@ -71,28 +71,22 @@ var keysEnabled = {"ArrowUp": false, "ArrowDown": false, "ArrowLeft": false, "Ar
 var joyEnabled = {"ArrowUp": false, "ArrowDown": false, "ArrowLeft": false, "ArrowRight": false};
 document.addEventListener('keydown', (event) => {
     var code = event.code;
-    console.log("Keydown: " + code);
     if ((currentplayer) &&(validkeys.indexOf(code) > -1 )) {
-        console.log("Dcode: " + code + " keysEnabled[code]: " + keysEnabled[code]);
         if (code === "Space"){
             launchClaw();
         } else if (keysEnabled[code] === false) {
             keysEnabled[code] = true;
             socket.emit("control", code, "down");
-            console.log("DScode: " + code + " keysEnabled[code]: " + keysEnabled[code]);
         }
     }
 }, false);
 
 document.addEventListener('keyup', (event) => {
     var code = event.code;
-    console.log("Keyup: " + code);
     if ((currentplayer) &&(validkeys.indexOf(code) > -1 )) {
-        console.log("Ucode: " + code + " keysEnabled[code]: " + keysEnabled[code]);
         if (keysEnabled[code] === true) {
             keysEnabled[code] = false;
             socket.emit("control", code, "up");
-            console.log("UScode: " + code + " keysEnabled[code]: " + keysEnabled[code]);
         }
     }
 }, false);
@@ -124,7 +118,6 @@ function startcountdown() {
             played = true;
             var direction=joy.GetDir();
             if ((["N","NW","NE"].includes(direction)) && (joyEnabled["ArrowUp"] === false)) {
-                console.log("JArrowUp: " + ArrowUp + " joyEnabled['ArrowUp']: " + joyEnabled["ArrowUp"]);
                 joyEnabled["ArrowUp"] = true;
                 socket.emit("control", "ArrowUp", "down");
                 if (joyEnabled["ArrowDown"] == true){
@@ -192,7 +185,7 @@ function startcountdown() {
             document.getElementById("countdown").innerHTML = "GO!";
         } else if ((countdown < 0) && (initial === false)) {
             launchClaw();
-            
+            initial = true;
         } else  if (initial === true){
 
             document.getElementById("countdown").innerHTML = "Start in: " + countdown;
