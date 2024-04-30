@@ -124,55 +124,55 @@ function startcountdown() {
         if (currentplayer == true) {
             played = true;
             var direction=joy.GetDir();
-            if ((["N","NW","NE"].includes(direction)) && (ArrowUp === false)) {
+            if ((["N","NW","NE"].includes(direction)) && (document["ArrowUp"] === false)) {
                 console.log("JArrowUp: " + ArrowUp + " document['ArrowUp']: " + document["ArrowUp"]);
-                ArrowUp = true;
+                document["ArrowUp"] = true;
                 socket.emit("control", "ArrowUp", "down");
-                if (ArrowDown == true){
-                    ArrowDown = false;
+                if (document["ArrowDown"] == true){
+                    document["ArrowDown"] = false;
                     socket.emit("control", "ArrowDown", "up");
                 }
                 console.log("Up");
-            } else if ((["S","SW","SE"].includes(direction)) && (ArrowDown === false)) {
-                ArrowDown = true;
+            } else if ((["S","SW","SE"].includes(direction)) && (document["ArrowDown"] === false)) {
+                document["ArrowDown"] = true;
                 socket.emit("control", "ArrowDown", "down");
-                if (ArrowUp == true){
-                    ArrowUp = false;
+                if (document["ArrowUp"] == true){
+                    document["ArrowUp"] = false;
                     socket.emit("control", "ArrowUp", "up");
                 }
                 console.log("Down");
             }
-            if ((["E","NE","SE"].includes(direction)) && (ArrowRight === false)) {
-                ArrowRight = true;
+            if ((["E","NE","SE"].includes(direction)) && (document["ArrowRight"] === false)) {
+                document["ArrowRight"] = true;
                 socket.emit("control", "ArrowRight", "down");
-                if (ArrowLeft == true){
-                    ArrowLeft = false;
+                if (document["ArrowLeft"] == true){
+                    document["ArrowLeft"] = false;
                     socket.emit("control", "ArrowLeft", "up");
                 }
                 console.log("Right");
-            } else if ((["W","NW","SW"].includes(direction)) && (ArrowLeft === false)) {
-                ArrowLeft = true;
+            } else if ((["W","NW","SW"].includes(direction)) && (document["ArrowLeft"] === false)) {
+                document["ArrowLeft"] = true;
                 socket.emit("control", "ArrowLeft", "down");
-                if (ArrowRight == true){
-                    ArrowRight = false;
+                if (document["ArrowRight"] == true){
+                    document["ArrowRight"] = false;
                     socket.emit("control", "ArrowRight", "up");
                 }
                 console.log("Left");
             } else if (direction == "C"){
-                if (ArrowUp == true){
-                    ArrowUp = false;
+                if (document["ArrowUp"] == true){
+                    document["ArrowUp"] = false;
                     socket.emit("control", "ArrowUp", "up");
                 }
-                if (ArrowDown == true){
-                    ArrowDown = false;
+                if (document["ArrowDown"] == true){
+                    document["ArrowDown"] = false;
                     socket.emit("control", "ArrowDown", "up");
                 }
-                if (ArrowLeft == true){
-                    ArrowLeft = false;
+                if (document["ArrowLeft"] == true){
+                    document["ArrowLeft"] = false;
                     socket.emit("control", "ArrowLeft", "up");
                 }
-                if (ArrowRight == true){
-                    ArrowRight = false;
+                if (document["ArrowRight"] == true){
+                    document["ArrowRight"] = false;
                     socket.emit("control", "ArrowRight", "up");
                 }
             }
