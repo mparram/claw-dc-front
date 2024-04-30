@@ -63,7 +63,7 @@ io.on('connection', (socket) => {
       socket.emit("valid_user", {"valid": true, "username": usr});
       socket.on('control',(key, act) => {
         if (currentplayer === usr){
-          console.log(usr + " send: " + key);
+          console.log(usr + " send: " + key + " act: " + act);
           ioclient.emit("control", key, act);
           if (key === "Space"){
             currentplayer = null;
