@@ -110,17 +110,21 @@ function startcountdown() {
                 played = true;
                 var direction=joy.GetDir();
                 if (["N","NW","NE"].includes(direction)) {
-                    socket.emit("control", "ArrowUp");
+                    socket.emit("control", "ArrowUp", "down");
+                    socket.emit("control", "ArrowDown", "up");
                     console.log("Up");
                 } else if (["S","SW","SE"].includes(direction)) {
-                    socket.emit("control", "ArrowDown");
+                    socket.emit("control", "ArrowDown", "down");
+                    socket.emit("control", "ArrowUp", "up");
                     console.log("Down");
                 }
                 if (["E","NE","SE"].includes(direction)) {
-                    socket.emit("control", "ArrowRight");
+                    socket.emit("control", "ArrowRight", "down");
+                    socket.emit("control", "ArrowLeft", "up");
                     console.log("Right");
                 } else if (["W","NW","SW"].includes(direction)) {
-                    socket.emit("control", "ArrowLeft");
+                    socket.emit("control", "ArrowLeft", "down");
+                    socket.emit("control", "ArrowRight", "up");
                     console.log("Left");
                 }
             } else if ((currentplayer ==false ) && (played == true)) {
