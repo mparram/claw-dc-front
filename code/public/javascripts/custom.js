@@ -71,7 +71,8 @@ var ArrowDown = false;
 var ArrowLeft = false;
 var ArrowRight = false;
 document.addEventListener('keydown', (event) => {
-    var code = event.code;    
+    var code = event.code;
+    console.log("Keydown: " + code);
     if ((currentplayer) &&(validkeys.indexOf(code) > -1 )) {
         console.log("Dcode: " + code + " window[code]: " + window[code]);
         if (code === "Space"){
@@ -86,7 +87,7 @@ document.addEventListener('keydown', (event) => {
 
 document.addEventListener('keyup', (event) => {
     var code = event.code;
-    
+    console.log("Keyup: " + code);
     if ((currentplayer) &&(validkeys.indexOf(code) > -1 )) {
         console.log("Ucode: " + code + " window[code]: " + window[code]);
         if (window[code] === true) {
