@@ -72,6 +72,7 @@ var joyEnabled = {"ArrowUp": false, "ArrowDown": false, "ArrowLeft": false, "Arr
 document.addEventListener('keydown', (event) => {
     var code = event.code;
     // if code is the key q, socket emit the message "panic"
+    console.log("code: " + code);
     if (code === "KeyQ") {
         socket.emit("panic");
     }
