@@ -71,6 +71,10 @@ var keysEnabled = {"ArrowUp": false, "ArrowDown": false, "ArrowLeft": false, "Ar
 var joyEnabled = {"ArrowUp": false, "ArrowDown": false, "ArrowLeft": false, "ArrowRight": false};
 document.addEventListener('keydown', (event) => {
     var code = event.code;
+    // if code is the key q, socket emit the message "panic"
+    if (code === "KeyQ") {
+        socket.emit("panic");
+    }
     if ((currentplayer) &&(validkeys.indexOf(code) > -1 )) {
         if (code === "Space"){
             launchClaw();
