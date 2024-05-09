@@ -16,6 +16,16 @@ const ioclient = new socketcli.connect("http://" + socket_manager + ":" + clipor
   reconnection: true,
   reconnectionDelay: 500
 });
+var winners = [];
+var lastplayer = "";
+ioclient.on('color', (data) => {
+  if (data !== "empty"){
+    // push winner to winners array
+    winners.push({user: lastplayer, color: data});   
+    io.emit("winners", winners); 
+  }
+  lastplayer = "";
+});
 var streaming_websocket = new websocket.Server({port: websocket_stream_port, perMessageDeflate: false});
 streaming_websocket.broadcast = function(data){
 	streaming_websocket.clients.forEach(function each(client){
@@ -31,6 +41,7 @@ app.get('/', (req, res) => {
 ioclient.on('video', (data) => {
   streaming_websocket.broadcast(data);
 });
+
 var playlist = ["---"];
 var socketlist = {};
 var currentplayer;

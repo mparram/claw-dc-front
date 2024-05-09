@@ -50,6 +50,34 @@ socket.on("valid_user", (data) => {
     }
 })
 
+socket.on("winners", (data) => {
+    console.log("winners: " + data);
+    // winners es un array de objetos con los campos: user, color
+    // quiero mostrar en el div winners los nombres de los ganadores y un circulo del color que han cogido
+    var winners = "";
+    for (var i = 0; i < data.length; i++){
+        winners += "<div class='winnername'>"+data[i].user+"</div><div class='winnercolor' style='background-color:"+data[i].color+"'></div>";
+    }
+    
+    if (data.length > 0){
+        // aplicar efecto de marquesina
+        var winnersdiv = document.getElementById("winners");
+        winnersdiv.innerHTML = winners;
+        var winnersdivwidth = winnersdiv.offsetWidth;
+        var winnersdivleft = 100;
+        var winnersdivright = 0;
+        var winnersdivinterval = setInterval(function(){
+            if (winnersdivleft < -winnersdivwidth){
+                winnersdivleft = 100;
+            }
+            winnersdivleft -= 1;
+            winnersdiv.style.left = winnersdivleft + "%";
+        }
+        , 20);
+
+    }
+})
+
 function toggledisplay() {
     var clawcam = document.getElementById("clawcam");
     var usernamecard = document.getElementById("usernamecard");
@@ -191,7 +219,7 @@ function startcountdown() {
         } else if ((countdown < 0) && (initial === false)) {
             launchClaw();
             initial = true;
-        } else  if (initial === true){
+        } else if (initial === true){
 
             document.getElementById("countdown").innerHTML = "Start in: " + countdown;
             countdown -= 1;
