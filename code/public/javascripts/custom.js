@@ -205,8 +205,8 @@ function startcountdown() {
             initial = false;
             document.getElementById("countdown").innerHTML = "GO!";
         } else if ((countdown < 0) && (initial === false)) {
-            launchClaw();
             initial = true;
+            launchClaw();
         } else if (initial === true){
 
             document.getElementById("countdown").innerHTML = "Start in: " + countdown;
