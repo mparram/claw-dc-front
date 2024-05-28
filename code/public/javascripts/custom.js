@@ -123,10 +123,11 @@ function launchClaw(){
     currentplayer = false;
     clearInterval(countdownInterval);
     socket.emit("control", "Space", "down");
-    currentplayer = false;
+    
     document.getElementById("launch").disabled = true;
     document.getElementById("countdown").style.visibility = "hidden";
     setTimeout(() => {
+        played = false;
         document.getElementById("usernamecard").style.visibility = "visible";
     }, 7000);
 }
@@ -139,7 +140,7 @@ function startcountdown() {
     document.getElementById("countdown").style.top= "20%";
     document.getElementById("countdown").innerHTML = "Ready...";
     document.getElementById("countdown").style.visibility = "visible";
-
+    
     var joystickCatch = setInterval(function(){ 
         
         if (currentplayer == true) {
