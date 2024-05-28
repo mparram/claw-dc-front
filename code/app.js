@@ -19,6 +19,7 @@ const ioclient = new socketcli.connect("http://" + socket_manager + ":" + clipor
 var winners = [];
 var lastplayer = "";
 ioclient.on('color', (data) => {
+  console.log("color: " + data);
   if (data !== "empty"){
     // push winner to winners array
     winners.push({user: lastplayer, color: data});   
