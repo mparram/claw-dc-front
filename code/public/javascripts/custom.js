@@ -53,6 +53,9 @@ socket.on("valid_user", (data) => {
 socket.on("winners", (data) => {
     console.log("winners: " + JSON.stringify(data));
     var winners = "| ";
+    if (data.length > 6){
+        data = data.slice(data.length - 6);
+    }
     for (var i = 0; i < data.length; i++){
         console.log("winner: " + data[i].user + " color: " + data[i].color);
         winners += "<div class='winnername'>" + data[i].user + "</div> - <div class='winnercolor' style='background-color:" + data[i].color + "'></div> | ";
@@ -89,7 +92,7 @@ var joyEnabled = {"ArrowUp": false, "ArrowDown": false, "ArrowLeft": false, "Arr
 document.addEventListener('keydown', (event) => {
     var code = event.code;
     // if code is the key q, socket emit the message "panic"
-    console.log("code: " + code);
+
     if (code === "KeyQ") {
         socket.emit("panic");
     }
@@ -98,6 +101,7 @@ document.addEventListener('keydown', (event) => {
             launchClaw();
         } else if (keysEnabled[code] === false) {
             keysEnabled[code] = true;
+            console.log("code: " + code + " down");
             socket.emit("control", code, "down");
         }
     }
@@ -108,6 +112,7 @@ document.addEventListener('keyup', (event) => {
     if ((currentplayer) &&(validkeys.indexOf(code) > -1 )) {
         if (keysEnabled[code] === true) {
             keysEnabled[code] = false;
+            console.log("code: " + code + " up");
             socket.emit("control", code, "up");
         }
     }
