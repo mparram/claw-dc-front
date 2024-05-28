@@ -34,7 +34,7 @@ canvas {
 }
 
 .winnername {
-    background-color: #e9ecef;
+    display: inline-block;
     color: #000;
 }
 

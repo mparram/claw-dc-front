@@ -52,10 +52,10 @@ socket.on("valid_user", (data) => {
 
 socket.on("winners", (data) => {
     console.log("winners: " + JSON.stringify(data));
-    var winners = "";
+    var winners = "| ";
     for (var i = 0; i < data.length; i++){
         console.log("winner: " + data[i].user + " color: " + data[i].color);
-        winners += "<div class='winnername'>" + data[i].user + "</div><div class='winnercolor' style='background-color:" + data[i].color + "'></div>";
+        winners += "<div class='winnername'>" + data[i].user + "</div> - <div class='winnercolor' style='background-color:" + data[i].color + "'></div> | ";
     }
     var winnersdiv = document.getElementById("winners");
     if (data.length > 0){
