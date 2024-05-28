@@ -196,6 +196,8 @@ function startcountdown() {
     }, 20);
     countdownInterval = setInterval(function() {
         console.log("countdown: " + countdown);
+        console.log("initial: " + initial);
+        console.log("currentplayer: " + currentplayer);
         if ((countdown === -1) && (initial === true)) {
             currentplayer = true;
             countdown -= 1;
