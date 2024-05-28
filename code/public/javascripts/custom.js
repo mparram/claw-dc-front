@@ -51,7 +51,7 @@ socket.on("valid_user", (data) => {
 })
 
 socket.on("winners", (data) => {
-    console.log("winners: " + data);
+    console.log("winners: " + JSON.stringify(data));
     var winners = "";
     for (var i = 0; i < data.length; i++){
         winners += "<div class='winnername'>"+data[i].user+"</div><div class='winnercolor' style='background-color:"+data[i].color+"'></div>";
