@@ -79,6 +79,7 @@ io.on('connection', (socket) => {
             console.log("panic");
             ioclient.emit("panic");
           });
+          lastplayer = usr;
           console.log(usr + " send: " + key + " act: " + act);
           ioclient.emit("control", key, act);
           if (key === "Space"){
