@@ -17,11 +17,8 @@ canvas {
     z-index: 2;
     background-color: rgba(255,255,255, 0.61);
 }
-/*
-#winners es una marquesina que se desplaza de derecha a izquierda, ocupando el 100% del ancho de la pantalla y 50px de alto, con el fondo blanco semitransparente. El texto se desplaza a 2px por frame.
-*/
+
 #winners {
-    position: absolute;
     margin-top: 10px;
     z-index: 2;
     background-color: rgba(255,255,255, 0.61);
@@ -33,7 +30,14 @@ canvas {
     font-size: 18px;
     color: #630e0e;
     border-radius: 0.50rem!important;
+    visibility: hidden;
 }
+
+.winnername {
+    background-color: #e9ecef;
+    color: #000;
+}
+
 .winnercolor {
     /*
     clase para un div que será un circulo de 10px de radio.
