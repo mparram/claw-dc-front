@@ -114,6 +114,7 @@ document.addEventListener('keyup', (event) => {
 }, false);
 
 function launchClaw(){
+    initial = true;
     currentplayer = false;
     clearInterval(countdownInterval);
     socket.emit("control", "Space", "down");
@@ -208,7 +209,6 @@ function startcountdown() {
             initial = false;
             document.getElementById("countdown").innerHTML = "GO!";
         } else if ((countdown < 0) && (initial === false)) {
-            initial = true;
             launchClaw();
         } else if (initial === true){
 
