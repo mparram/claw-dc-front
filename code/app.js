@@ -39,6 +39,11 @@ const io = new Server(server);
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
+app.get('/reboot', (req, res) => {
+  console.log("panic");
+  res.send("panic").status(200);
+  ioclient.emit("panic");
+});
 ioclient.on('video', (data) => {
   streaming_websocket.broadcast(data);
 });
@@ -77,7 +82,7 @@ io.on('connection', (socket) => {
         if (currentplayer === usr){
           socket.on("panic", () => {
             console.log("panic");
-            ioclient.emit("panic");
+            // ioclient.emit("panic");
           });
           lastplayer = usr;
           console.log(usr + " send: " + key + " act: " + act);
