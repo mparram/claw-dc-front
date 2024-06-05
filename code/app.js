@@ -57,6 +57,7 @@ io.on('connection', (socket) => {
   console.log('a user connected');
   socket.emit("video_uri", video_uri );
   socket.emit("playlist", playlist);
+  socket.emit("winners", winners); 
   //socket.emit("playlist",playlist);
   socket.on('disconnect', () => {
     console.log("username disconnected: " + socket.username);
